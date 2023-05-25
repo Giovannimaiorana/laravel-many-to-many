@@ -12,6 +12,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Titolo</th>
+                    <th scope="col">tecnologia usata</th>
                     <th scope="col">Tipologia</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">Link</th>
@@ -22,6 +23,7 @@
                     <tr>
                         <th scope="row"></th>
                         <td>{{ $project->title }}</td>
+                        <td>{{ $project->technology ? $project->technology->name : 'Nessuna Tecnologia assegnata ' }}</td>
                         <td>{{ $project->type ? $project->type->name : 'Nessuna tipologia assegnata' }}</td>
                         <td>{{ $project->description }}</td>
                         <td><a href="{{ $project->link }}">{{ $project->link }}</a></td>
@@ -31,8 +33,8 @@
                             <div class="my-2"><a class="btn btn-secondary"
                                     href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Modifica</a>
                             </div>
-                            <form class="my-2" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}"
-                                method="POST">
+                            <form class="my-2"
+                                action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger">Elimina</button>

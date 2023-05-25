@@ -13,6 +13,11 @@
                     <p class="card-text"><span class="font-weight-bold">Descrizione:</span> <br>{{ $project->description }}
                     </p>
                     <p class="card-text"><span class="font-weight-bold">Link</span> <br>{{ $project->link }}</p>
+                    <p class="card-text"><span class="font-weight-bold">Tecnologie usate:</span> <br>
+                        @foreach ($project->technologies as $technology)
+                            <span class="badge rounded-pill text-bg-info">{{ $technology->name }}</span>
+                        @endforeach
+                    </p>
                 </div>
             </div>
             <div>

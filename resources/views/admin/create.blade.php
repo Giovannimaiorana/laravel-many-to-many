@@ -81,6 +81,26 @@
                     <p class="text-success">Campo inserito correttamente!</p>
                 @endif
             </div>
+
+            <div class="mb-3">
+                @foreach ($technologies as $technology)
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        <input id="tech_{{ $technology->id }}" type="checkbox" class="btn-check" name="technologies[]"
+                            autocomplete="off" value="{{ $technology->id }}">
+                        <label class="btn btn-outline-primary"
+                            for="tech_{{ $technology->id }}">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+                @if ($errors->has('technologies[]'))
+                    @error('technologies[]')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                @elseif ($errors->any() && old('technologies[]'))
+                    <p class="text-success">Campo inserito correttamente!</p>
+                @endif
+            </div>
             <button type="submit" class="btn btn-primary my-4">Crea nuovo fumetto</button>
 
         </form>

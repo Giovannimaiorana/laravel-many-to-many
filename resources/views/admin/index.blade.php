@@ -23,7 +23,11 @@
                     <tr>
                         <th scope="row"></th>
                         <td>{{ $project->title }}</td>
-                        <td>{{ $project->technology ? $project->technology->name : 'Nessuna Tecnologia assegnata ' }}</td>
+                        <td>
+                            @foreach ($project->technologies as $technology)
+                                <span class="badge rounded-pill text-bg-info">{{ $technology->name }}</span>
+                            @endforeach
+                        </td>
                         <td>{{ $project->type ? $project->type->name : 'Nessuna tipologia assegnata' }}</td>
                         <td>{{ $project->description }}</td>
                         <td><a href="{{ $project->link }}">{{ $project->link }}</a></td>

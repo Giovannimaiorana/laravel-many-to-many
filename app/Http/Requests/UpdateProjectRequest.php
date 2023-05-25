@@ -22,7 +22,7 @@ class UpdateProjectRequest extends FormRequest
             'link' => 'nullable|url|max:255',
             'preview_image' => 'nullable|url|max:255',
             'type_id' =>'nullable|exists:types,id',
-            'projects'=>'exists:technologies,id'
+            'technologies'=>'exists:technologies,id'
         ];
     }
 }

@@ -62,13 +62,16 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types=Type::all();
-        return view('admin.edit',compact('project','types'));
+        $technologies=Technology::all();
+        return view('admin.edit',compact('project','types', 'technologies'));
     }
 
 
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $data = $request->validated();
+
+        $project->technologies()->sync($request->technologies);
         $project->update($data);
 
 

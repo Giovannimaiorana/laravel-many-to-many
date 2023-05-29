@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="{{ Route('admin.projects.store') }}" method="POST">
+        <form action="{{ Route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -68,8 +68,8 @@
                 @endif
             </div>
             <div class="mb-3">
-                <label for="preview_image" class="form-label">Immagine preview:</label>
-                <input type="text" class="form-control @error('preview_image') is-invalid @enderror" id="preview_image"
+                <label for="preview_image" class="form-label">Seleziona immagine di copertina</label>
+                <input type="file" class="form-control @error('preview_image') is-invalid @enderror" id="preview_image"
                     name="preview_image" value="{{ old('preview_image') }}">
                 @if ($errors->has('preview_image'))
                     @error('preview_image')

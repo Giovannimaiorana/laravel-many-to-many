@@ -7,6 +7,7 @@ use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -45,6 +46,12 @@ class ProjectController extends Controller
 
         $newProject->save();
 
+
+        if($request->hasFile('preview_image')){
+            $path = Storage::put('preview-image-cover',$request->preview_image);
+            $data['preview_image'] = $path;
+        }
+
         if($request->has('technologies')){
             $newProject->technologies()->attach($request->technologies);
         }
@@ -73,6 +80,17 @@ class ProjectController extends Controller
 
         $project->technologies()->sync($request->technologies);
         $project->update($data);
+        if($request->hasFile('preview_image')){
+
+            if($project->preview_image){
+                Storage::delete($project->preview_image);
+            }
+
+            $path = Storage::put('preview-image-cover',$request->preview_image);
+            $data['preview_image'] = $path;
+
+        }
+
 
 
         return redirect()->route('admin.projects.show',['project'=>$project->id]);

@@ -4,6 +4,11 @@
     <div class="container">
         <div class="row my-5">
             <div class="card" style="width: 18rem;">
+                @if ($project->preview_image)
+                    <img class="card-img-top" src="{{ asset('storage/' . $project->preview_image) }}">
+                @else
+                    <img class="card-img-top" src="{{ asset('storage/image_not_available.png') }}">
+                @endif
 
                 <div class="card-body">
                     <p class="card-text"><span class="font-weight-bold"> Titolo:</span> <br>{{ $project->title }}</p>

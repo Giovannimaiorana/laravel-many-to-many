@@ -16,6 +16,7 @@
                     <th scope="col">Tipologia</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">Link</th>
+                    <th scope="col">Anteprima Immagine</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +33,18 @@
                         <td>{{ $project->description }}</td>
                         <td><a href="{{ $project->link }}">{{ $project->link }}</a></td>
                         <td>
+                            @if ($project->preview_image)
+                                <div class="index_img">
+                                    <img class="card-img-top" src="{{ asset('storage/' . $project->preview_image) }}"
+                                        alt="{{ $project->title }}">
+                                </div>
+                            @else
+                                <div class="index_img">
+                                    <img class="card-img-top" src="{{ asset('storage/image_not_available.png') }}">
+                                </div>
+                            @endif
+                        </td>
+                        <td>
                             <div class="my-2"><a class="btn btn-primary"
                                     href="{{ route('admin.projects.show', ['project' => $project->id]) }}">Info</a></div>
                             <div class="my-2"><a class="btn btn-secondary"
@@ -45,6 +58,7 @@
                             </form>
 
                         </td>
+
 
                     </tr>
                 @endforeach
